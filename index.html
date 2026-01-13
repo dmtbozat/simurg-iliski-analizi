@@ -170,6 +170,40 @@
             filter: brightness(1.05);
             border-bottom-style: solid;
         }
+
+        /* =========================
+           EKLENTİ: Kapanış (Instagram CTA) büyütme
+           Refactor yok — sadece ekleme
+           ========================= */
+        #kapanis.output{
+            padding: 18px 16px !important;   /* daha iri */
+            font-size: 16px;                 /* genel yazı büyüsün */
+            line-height: 1.55;
+        }
+
+        #kapanis.output b{
+            display: inline-block;
+            font-size: 20px;                 /* "Sevgili Simurg" büyüsün */
+            margin-bottom: 8px;
+        }
+
+        #kapanis.output a.ig-link{
+            display: inline-block;           /* buton gibi */
+            margin-top: 10px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 800;
+            background: rgba(241, 200, 76, 0.16);
+            border: 1px solid rgba(241, 200, 76, 0.55);
+            text-decoration: none;           /* dashed alt çizgi yerine buton hissi */
+            border-bottom: none;
+        }
+
+        #kapanis.output a.ig-link:hover{
+            filter: brightness(1.06);
+            transform: translateY(-1px);
+        }
     </style>
 </head>
 <body>
@@ -642,7 +676,7 @@
                 writeParagraph(
 `Detaylı numerolojik ilişki analizi için Instagram’dan bana mesaj bırak, birlikte bakalım.
 
-Instagram Hesabı: ` + igLink
+Instagram Hesabına Erişmek için Linke Tıklayın: ` + igLink
                 );
 
             const div = document.getElementById("kapanis");
