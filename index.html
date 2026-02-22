@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>İlişki Analizi</title>
 
   <style>
@@ -48,6 +48,7 @@
       backdrop-filter: blur(6px);
     }
 
+    /* ✅ LOGO ALANI */
     .brand {
       display: flex;
       justify-content: center;
@@ -78,7 +79,9 @@
       line-height: 1.35;
     }
 
-    .input-group { margin-bottom: 14px; }
+    .input-group {
+      margin-bottom: 14px;
+    }
 
     .input-group label {
       font-size: 13px;
@@ -94,19 +97,12 @@
       background: rgba(255,255,255,0.06);
       color: var(--text);
       outline: none;
-      transition: border-color .15s ease, box-shadow .15s ease;
+      transition: border-color .15s ease, box-shadow .15s ease, transform .05s ease;
     }
 
     .input-group input:focus{
       border-color: var(--border);
       box-shadow: 0 0 0 4px rgba(241,200,76,0.12);
-    }
-
-    .btn-container {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      margin-top: 6px;
     }
 
     .btn {
@@ -137,12 +133,19 @@
     .btn-gray:hover { filter: brightness(1.05); }
     .btn-gray:active { transform: translateY(1px); }
 
+    .btn-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
     .output {
       margin-top: 18px;
       font-size: 15px;
       text-align: center;
       color: var(--text);
-      padding: 14px 12px;
+      padding: 12px;
       border-radius: 12px;
       background:
         radial-gradient(500px 220px at 15% 0%, rgba(241,200,76,0.16), transparent 55%),
@@ -150,32 +153,61 @@
       border: 1px solid rgba(241,200,76,0.22);
     }
 
-    /* --- üst metin hiyerarşisi --- */
-    .result-top{
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-    .pill{
-      display:inline-block;
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(233,216,255,0.20);
-      background: rgba(233,216,255,0.10);
-      font-size: 13px;
-      font-weight: 700;
-      color: rgba(246,241,255,0.98);
-    }
-    .score{
-      font-size: 18px;
-      font-weight: 900;
-      color: var(--gold-500);
-      text-shadow: 0 1px 0 rgba(0,0,0,0.35);
+    #kapanis.output{
+      background:
+        radial-gradient(500px 220px at 85% 0%, rgba(241,200,76,0.16), transparent 55%),
+        linear-gradient(180deg, rgba(233,216,255,0.10), rgba(255,255,255,0.05));
     }
 
-    /* --- insani yorum kartı --- */
+    .ig-link{
+      color: var(--gold-500);
+      text-decoration: none;
+      font-weight: bold;
+      border-bottom: 1px dashed rgba(241,200,76,0.65);
+      padding-bottom: 1px;
+    }
+    .ig-link:hover{
+      filter: brightness(1.05);
+      border-bottom-style: solid;
+    }
+
+    /* =========================
+      EKLENTİ: Kapanış (Instagram CTA) büyütme
+      Refactor yok — sadece ekleme
+    ========================= */
+    #kapanis.output{
+      padding: 18px 16px !important;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    #kapanis.output b{
+      display: inline-block;
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    #kapanis.output a.ig-link{
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 800;
+      background: rgba(241, 200, 76, 0.16);
+      border: 1px solid rgba(241, 200, 76, 0.55);
+      text-decoration: none;
+      border-bottom: none;
+    }
+
+    #kapanis.output a.ig-link:hover{
+      filter: brightness(1.06);
+      transform: translateY(-1px);
+    }
+
+    /* =========================
+      EKLENTİ: İnsani yorum kartı (Sadece UI katmanı)
+    ========================= */
     .human-card{
       margin-top: 12px;
       padding: 14px 14px;
@@ -186,7 +218,7 @@
       line-height: 1.55;
     }
     .human-card .h-title{
-      font-weight: 900;
+      font-weight: 800;
       color: var(--gold-500);
       font-size: 16px;
       margin-bottom: 6px;
@@ -201,67 +233,10 @@
       padding: 4px 10px;
       border-radius: 999px;
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 700;
       border: 1px solid rgba(233,216,255,0.22);
       background: rgba(233,216,255,0.10);
       margin-left: 6px;
-    }
-    .today-move{
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px dashed rgba(241,200,76,0.35);
-      font-weight: 800;
-    }
-
-    /* --- breakdown satırı --- */
-    .breakdown{
-      margin-top: 10px;
-      font-size: 13px;
-      color: rgba(217,199,238,0.95);
-    }
-    .breakdown b{ color: rgba(246,241,255,0.98); }
-
-    /* --- kapanış CTA --- */
-    #kapanis.output{
-      margin-top: 12px;
-      padding: 18px 16px !important;
-      font-size: 16px;
-      line-height: 1.55;
-      background:
-        radial-gradient(500px 220px at 85% 0%, rgba(241,200,76,0.16), transparent 55%),
-        linear-gradient(180deg, rgba(233,216,255,0.10), rgba(255,255,255,0.05));
-    }
-
-    #kapanis.output b{
-      display: inline-block;
-      font-size: 20px;
-      margin-bottom: 8px;
-    }
-
-    .ig-link{
-      color: var(--gold-500);
-      text-decoration: none;
-      font-weight: 900;
-      border-bottom: 1px dashed rgba(241,200,76,0.65);
-      padding-bottom: 1px;
-    }
-
-    #kapanis.output a.ig-link{
-      display: inline-block;
-      margin-top: 10px;
-      padding: 10px 14px;
-      border-radius: 12px;
-      font-size: 16px;
-      font-weight: 900;
-      background: rgba(241, 200, 76, 0.16);
-      border: 1px solid rgba(241, 200, 76, 0.55);
-      text-decoration: none;
-      border-bottom: none;
-    }
-
-    #kapanis.output a.ig-link:hover{
-      filter: brightness(1.06);
-      transform: translateY(-1px);
     }
   </style>
 </head>
@@ -269,6 +244,7 @@
 <body>
   <div class="container">
 
+    <!-- ✅ LOGO -->
     <div class="brand">
       <img src="logo.png" alt="Numerolog Simurg Logo">
     </div>
@@ -305,8 +281,7 @@
     </div>
 
     <div id="output" class="output" style="display:none;"></div>
-    <div id="kapanis" class="output" style="display:none;"></div>
-
+    <div id="kapanis" class="output" style="display:none; margin-top:12px;"></div>
   </div>
 
   <script>
@@ -331,6 +306,7 @@
         'ç': 'c', 'ğ': 'g', 'ı': 'i', 'İ': 'I', 'ö': 'o', 'ş': 's', 'ü': 'u',
         'Ç': 'C', 'Ğ': 'G', 'Ö': 'O', 'Ş': 'S', 'Ü': 'U'
       };
+
       for (let char in turkishChars) {
         const regex = new RegExp(char, 'g');
         value = value.replace(regex, turkishChars[char]);
@@ -404,7 +380,6 @@
 
     function isIn(val, arr) { return arr.indexOf(val) !== -1; }
 
-    /* ====== SKOR HESAPLAMA FONKSİYONLARI (DEĞİŞMEDİ) ====== */
     function calculateYasamScore(person1LifeCode, person2LifeCode) {
       let score = 0;
       if (
@@ -445,7 +420,15 @@
         (person1LifeCode === 5 && person2LifeCode === 8) ||
         (person1LifeCode === 6 && isIn(person2LifeCode, [1,5]))
       ) score = 10;
-      else score = 0;
+      else if (
+        (person1LifeCode === 2 && person2LifeCode === 0) ||
+        (person1LifeCode === 3 && person2LifeCode === 0) ||
+        (person1LifeCode === 4 && person2LifeCode === 0) ||
+        (person1LifeCode === 7 && person2LifeCode === 0) ||
+        (person1LifeCode === 8 && person2LifeCode === 0) ||
+        (person1LifeCode === 9 && person2LifeCode === 0)
+      ) score = 0;
+
       return score;
     }
 
@@ -489,7 +472,14 @@
         (person1Acq === 5 && person2Acq === 8) ||
         (person1Acq === 6 && isIn(person2Acq, [1,5]))
       ) score = 5;
-      else score = 0;
+      else if (
+        (person1Acq === 2 && person2Acq === 0) ||
+        (person1Acq === 3 && person2Acq === 0) ||
+        (person1Acq === 4 && person2Acq === 0) ||
+        (person1Acq === 7 && person2Acq === 0) ||
+        (person1Acq === 8 && person2Acq === 0) ||
+        (person1Acq === 9 && person2Acq === 0)
+      ) score = 0;
 
       return score;
     }
@@ -534,7 +524,14 @@
         (p1B === 5 && p2B === 8) ||
         (p1B === 6 && isIn(p2B, [1,5]))
       ) score = 5;
-      else score = 0;
+      else if (
+        (p1B === 2 && p2B === 0) ||
+        (p1B === 3 && p2B === 0) ||
+        (p1B === 4 && p2B === 0) ||
+        (p1B === 7 && p2B === 0) ||
+        (p1B === 8 && p2B === 0) ||
+        (p1B === 9 && p2B === 0)
+      ) score = 0;
       return score;
     }
 
@@ -578,7 +575,14 @@
         (p1S === 5 && p2S === 8) ||
         (p1S === 6 && isIn(p2S, [1,5]))
       ) score = 5;
-      else score = 0;
+      else if (
+        (p1S === 2 && p2S === 0) ||
+        (p1S === 3 && p2S === 0) ||
+        (p1S === 4 && p2S === 0) ||
+        (p1S === 7 && p2S === 0) ||
+        (p1S === 8 && p2S === 0) ||
+        (p1S === 9 && p2S === 0)
+      ) score = 0;
       return score;
     }
 
@@ -622,7 +626,14 @@
         (p1V === 5 && p2V === 8) ||
         (p1V === 6 && isIn(p2V, [1,5]))
       ) score = 5;
-      else score = 0;
+      else if (
+        (p1V === 2 && p2V === 0) ||
+        (p1V === 3 && p2V === 0) ||
+        (p1V === 4 && p2V === 0) ||
+        (p1V === 7 && p2V === 0) ||
+        (p1V === 8 && p2V === 0) ||
+        (p1V === 9 && p2V === 0)
+      ) score = 0;
       return score;
     }
 
@@ -666,18 +677,52 @@
         (p1N === 5 && p2N === 8) ||
         (p1N === 6 && isIn(p2N, [1,5]))
       ) score = 5;
-      else score = 0;
+      else if (
+        (p1N === 2 && p2N === 0) ||
+        (p1N === 3 && p2N === 0) ||
+        (p1N === 4 && p2N === 0) ||
+        (p1N === 7 && p2N === 0) ||
+        (p1N === 8 && p2N === 0) ||
+        (p1N === 9 && p2N === 0)
+      ) score = 0;
       return score;
     }
 
-    /* ====== sadece metin / çıktı katmanı ====== */
     function getIliskiYorumu(iliskiPuani) {
-      if (iliskiPuani < 40) return "Mücadele";
-      if (iliskiPuani < 60) return "Değişken";
-      if (iliskiPuani < 85) return "Uyumlu";
-      return "Ruh Eşi";
+      let yorum = '';
+      if (iliskiPuani < 40) yorum = "Mücadele : Zorlu bir ilişki enerjisi";
+      else if (iliskiPuani >= 40 && iliskiPuani < 60) yorum = "Degisken : Uzlaşma becerilerini geliştirmenizi gerektiren ilişki enerjisi";
+      else if (iliskiPuani >= 60 && iliskiPuani < 85) yorum = "Uyumlu : Doyumlu ve tatminkar ilişki enerjisi";
+      else if (iliskiPuani >= 85 && iliskiPuani <= 100) yorum = "Ruh Eşi : Konuşmadan bile birbirinizi anlayacağınız, çekimi çok yüksek bir enerjidir.";
+      return yorum;
     }
 
+    function writeTitle(title) {
+      return `<b>${title}</b><br><br>`;
+    }
+
+    function writeParagraph(text) {
+      return `<div style="white-space:pre-line;">${text}</div>`;
+    }
+
+    function writeKapanisMesajiHTML() {
+      const igLink = `<a class="ig-link" href="https://www.instagram.com/numerologsimurg/" target="_blank" rel="noopener noreferrer">@numerologsimurg</a>`;
+      const html =
+        writeTitle("Sevgili Simurg") +
+        writeParagraph(
+`Detaylı numerolojik ilişki analizi için Instagram’dan bana mesaj bırak, birlikte bakalım.
+
+Instagram Hesabına Erişmek için Linke Tıklayın: ` + igLink
+        );
+
+      const div = document.getElementById("kapanis");
+      div.innerHTML = html;
+      div.style.display = "block";
+    }
+
+    /* =========================================================
+      EK: İnsani yorum motoru (HESAPLARA DOKUNMAZ — SADECE METİN)
+    ========================================================= */
     function getBand(iliskiPuani){
       if (iliskiPuani < 40) return "mucadele";
       if (iliskiPuani < 60) return "degisken";
@@ -685,55 +730,62 @@
       return "ruh_esi";
     }
 
+    function getBandLabel(band){
+      if (band === "mucadele") return "Mücadele";
+      if (band === "degisken") return "Değişken";
+      if (band === "uyumlu") return "Uyumlu";
+      return "Ruh Eşi";
+    }
+
     function buildHumanInsight({ iliskiPuani, Yasam, Edinim, Dogum, Ruh, Gorunur, Isim, p1Name, p2Name }) {
       const band = getBand(iliskiPuani);
-      const label = getIliskiYorumu(iliskiPuani);
+      const label = getBandLabel(band);
 
       const parts = [
-        { val: Yasam,   name: "Yaşam Kodları" },
-        { val: Edinim,  name: "Edinim" },
-        { val: Dogum,   name: "Doğum" },
-        { val: Ruh,     name: "Ruh" },
-        { val: Gorunur, name: "Görünür Kişilik" },
-        { val: Isim,    name: "İsim" },
+        { val: Yasam,    name: "Yaşam Kodları" },
+        { val: Edinim,   name: "Edinim" },
+        { val: Dogum,    name: "Doğum" },
+        { val: Ruh,      name: "Ruh" },
+        { val: Gorunur,  name: "Görünür Kişilik" },
+        { val: Isim,     name: "İsim" },
       ].sort((a,b) => b.val - a.val);
 
       const strongest = parts[0];
       const weakest = parts[parts.length - 1];
 
       let title = "";
-      let one = "", two = "", three = "";
+      let p1 = "", p2 = "", p3 = "";
+      let action = "";
       let scale = "";
-      let todayMove = "";
 
       if (band === "mucadele") {
         title = "Zorlayıcı ama öğretici bir bağ.";
-        one = "Bu ilişki kendiliğinden akmaktan çok, bilinçli emek ister.";
-        two = `Sizi taşıyan taraf <b>${strongest.name}</b>; en çok zorlayan taraf <b>${weakest.name}</b> görünüyor.`;
-        three = "Doğru iletişim kurulmazsa aynı döngü tekrar edebilir; kurulursa hızla olgunlaşır.";
+        p1 = "Bu eşleşme kendiliğinden akmaktan çok, bilinçli emek istiyor.";
+        p2 = "Yanlış anlaşılmalar ve inatlaşma döngüsü oluşursa yıpratabilir; doğru yönetilirse olgunlaştırır.";
+        p3 = `En rahat akan tarafınız <b>${strongest.name}</b>, en çok zorlayan tarafınız ise <b>${weakest.name}</b> görünüyor.`;
+        action = "Öneri: Tartışma anında “haklılık” yerine “anlaşılma” hedefi koyun; tek bir iletişim kuralı bile ilişkiyi ciddi rahatlatır.";
         scale = "Bu aralık genelde “zorlayıcı/öğretici” dinamiğe işaret eder.";
-        todayMove = "Tartışma anında 10 dakika ara verip sonra “ben böyle hissediyorum” cümlesiyle geri dönün.";
       } else if (band === "degisken") {
         title = "Emek verilirse yürür, otomatik akmaz.";
-        one = "Aranızda çekim var; fakat ilişki stabil kalmak için netlik ve uzlaşma ister.";
-        two = `Şu an ilişkiyi taşıyan alan <b>${strongest.name}</b>; tıkandığınız yer ise <b>${weakest.name}</b>.`;
-        three = "Yakınlaşıp uzaklaşma hissi olursa, sebep çoğu zaman beklenti ve iletişim tarzıdır.";
+        p1 = "Aranızda çekim var; fakat ilişki stabil kalmak için netlik ve uzlaşma ister.";
+        p2 = "Dönem dönem yakınlaşıp uzaklaşma hissi yaşayabilirsiniz; bu genelde iletişim tarzı ve beklenti farkından olur.";
+        p3 = `Şu an ilişkiyi taşıyan alan <b>${strongest.name}</b>; tıkandığınız yer ise <b>${weakest.name}</b>.`;
+        action = "Öneri: Bir konu büyümeden önce “ben böyle hissediyorum” diliyle mini konuşmalar yapın; bu eşleşmenin kilidi bu.";
         scale = "Bu aralık “emek + uzlaşma” ile yükselen bir uyumu anlatır.";
-        todayMove = "Bir konu büyümeden önce tek cümlelik check-in yapın: “Şu an bende kalan şu…”";
       } else if (band === "uyumlu") {
         title = "Uyum yüksek; birlikte büyüme potansiyeli var.";
-        one = "Bu eşleşmede genel enerji destekleyici ve tatmin edici.";
-        two = `En güçlü tarafınız <b>${strongest.name}</b>. Dikkat edilmesi gereken yer <b>${weakest.name}</b> tarafında birikme olmaması.`;
-        three = "İyi giden ilişkiyi kalıcı yapan şey, küçük ama düzenli ortak alışkanlıklardır.";
+        p1 = "Bu eşleşmede temel enerji genel olarak destekleyici ve tatmin edici.";
+        p2 = "Zor zamanlarda bile ortak payda bulma ihtimaliniz yüksek; ilişkiyi güçlendiren şey tutarlılık.";
+        p3 = `En güçlü tarafınız <b>${strongest.name}</b>. Dikkat edilmesi gereken tek yer <b>${weakest.name}</b> tarafında birikme olmaması.`;
+        action = "Öneri: İlişki iyi giderken bile küçük ritüeller (haftalık check-in, ortak hedef) kurarsanız uyum kalıcı olur.";
         scale = "Bu aralık “doğal uyum” ve tatmin potansiyelini gösterir.";
-        todayMove = "Haftalık 15 dakikalık “biz nasılız?” konuşması koyun, ilişkiyi çok sağlamlaştırır.";
       } else {
         title = "Çok güçlü çekim: aynı frekans hissi.";
-        one = "Bağ hızlı derinleşebilir; “az konuşup çok anlama” hissi verebilir.";
-        two = `Sizi en çok bir arada tutan alan <b>${strongest.name}</b>. Denge için <b>${weakest.name}</b> tarafını bilinçli beslemek iyi gelir.`;
-        three = "Yüksek enerji bazen yoğunluk getirir; sağlıklı sınırlar ilişkiyi korur.";
+        p1 = "Bu eşleşme ‘az konuşup çok anlama’ hissi yaratabilir; bağ hızlı derinleşir.";
+        p2 = "Bu kadar yüksek enerji bazen yoğunluk da getirir: kıskançlık/bağımlılık yerine sağlıklı sınırlar önemli.";
+        p3 = `Sizi en çok bir arada tutan alan <b>${strongest.name}</b>. Denge için <b>${weakest.name}</b> tarafını bilinçli beslemek iyi gelir.`;
+        action = "Öneri: Bağın gücünü ilişkiyi yönetmek için kullanın; ‘her şey kader’ deyip akışa bırakmak yerine ortak plan yapın.";
         scale = "Bu aralık “çok yüksek çekim ve güçlü bağ” enerjisidir.";
-        todayMove = "Birlikte ortak hedef belirleyin (mini plan): Bu bağın enerjisi planla daha da büyür.";
       }
 
       const namesLine = `<span class="h-sub"><b>${p1Name}</b> & <b>${p2Name}</b> için kısa yorum:</span>`;
@@ -741,10 +793,7 @@
       return {
         label,
         title,
-        bodyHtml:
-          `${namesLine}<br>${one}<br>${two}<br>${three}` +
-          `<div class="h-sub">${scale}</div>` +
-          `<div class="today-move">Bugün tek hamle: <span style="font-weight:800">${todayMove}</span></div>`
+        bodyHtml: `${namesLine}<br>${p1}<br>${p2}<br>${p3}<div class="h-sub">${scale}</div><div class="h-sub"><b>${action}</b></div>`
       };
     }
 
@@ -757,20 +806,10 @@
       `;
     }
 
-    function writeKapanisMesajiHTML() {
-      const igLink = `<a class="ig-link" href="https://www.instagram.com/numerologsimurg/" target="_blank" rel="noopener noreferrer">@numerologsimurg</a>`;
-      const html =
-        `<b>Sevgili Simurg</b><br><br>` +
-        `<div style="white-space:pre-line;">Detaylı numerolojik ilişki analizi için Instagram’dan bana mesaj bırak, birlikte bakalım.\n\nInstagram Hesabına Erişmek için Linke Tıklayın: ${igLink}</div>`;
-
-      const div = document.getElementById("kapanis");
-      div.innerHTML = html;
-      div.style.display = "block";
-    }
-
     function startAnalysis() {
       const person1Name = document.getElementById('person1Name').value;
       const person2Name = document.getElementById('person2Name').value;
+
       const person1DOB = document.getElementById('person1DOB').value;
       const person2DOB = document.getElementById('person2DOB').value;
 
@@ -805,7 +844,7 @@
       const Isim = calculateIsimScore(person1NameNumber, person2NameNumber);
 
       const iliskiPuani = Yasam + Edinim + Dogum + Ruh + Gorunur + Isim;
-      const iliskiDurumu = getIliskiYorumu(iliskiPuani);
+      const iliskiYorumu = getIliskiYorumu(iliskiPuani);
 
       const insight = buildHumanInsight({
         iliskiPuani,
@@ -814,26 +853,17 @@
         p2Name: person2Name
       });
 
-      const outputHTML = `
-        <div class="result-top">
-          <div class="score">Uyum Yüzdesi: %${iliskiPuani}</div>
-          <div class="pill">İlişki Durumu: ${iliskiDurumu} (%${iliskiPuani})</div>
-        </div>
-
+      const outputText = `
+        <b>UYUM YÜZDESİ:</b> %${iliskiPuani}
+        <br><br>
+        <b>İLİŞKİ DURUMU:</b> ${iliskiYorumu}
         ${writeHumanCardHTML(insight)}
-
-        <div class="breakdown">
-          <b>Yaşam:</b> ${Yasam} |
-          <b>Edinim:</b> ${Edinim} |
-          <b>Doğum:</b> ${Dogum} |
-          <b>Ruh:</b> ${Ruh} |
-          <b>Görünür:</b> ${Gorunur} |
-          <b>İsim:</b> ${Isim}
-        </div>
+        <br>
+        <b>Yasam:</b> ${Yasam} | <b>Edinim:</b> ${Edinim} | <b>Dogum:</b> ${Dogum} | <b>Ruh:</b> ${Ruh} | <b>Gorunur:</b> ${Gorunur} | <b>Isim:</b> ${Isim}
       `;
 
       const out = document.getElementById('output');
-      out.innerHTML = outputHTML;
+      out.innerHTML = outputText;
       out.style.display = 'block';
 
       writeKapanisMesajiHTML();
