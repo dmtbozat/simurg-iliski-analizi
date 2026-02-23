@@ -926,6 +926,18 @@ if (!person1DOB || !person2DOB || !isValidISODate(person1DOB) || !isValidISODate
 
       writeKapanisMesajiHTML();
     }
+
+function maskTRDate(el) {
+    // sadece rakamları al, max 8 hane (GGAAYYYY)
+    let v = (el.value || "").replace(/\D/g, "").slice(0, 8);
+
+    // 29 -> 29
+    // 2905 -> 29.05
+    // 29051988 -> 29.05.1988
+    if (v.length >= 5) el.value = v.slice(0, 2) + "." + v.slice(2, 4) + "." + v.slice(4);
+    else if (v.length >= 3) el.value = v.slice(0, 2) + "." + v.slice(2);
+    else el.value = v;
+  }
   </script>
 </body>
 </html>
