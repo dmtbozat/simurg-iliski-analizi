@@ -262,7 +262,7 @@
 
     <div class="input-group">
       <label for="person1DOB">Birinci Kişi: Doğum Tarihi</label>
-      <input type="text" id="person1DOB" placeholder="GG.AA.YYYY" inputmode="numeric" autocomplete="bday">
+      <input type="text" id="person1DOB" placeholder="GG.AA.YYYY" inputmode="numeric" autocomplete="bday" oninput="maskTRDate(this)">
     </div>
 
     <div class="input-group">
@@ -272,7 +272,7 @@
 
     <div class="input-group">
       <label for="person2DOB">İkinci Kişi: Doğum Tarihi</label>
-      <input type="text" id="person2DOB" placeholder="GG.AA.YYYY" inputmode="numeric" autocomplete="bday">
+      <input type="text" id="person2DOB" placeholder="GG.AA.YYYY" inputmode="numeric" autocomplete="bday" oninput="maskTRDate(this)">
     </div>
 
     <div class="btn-container">
@@ -313,6 +313,21 @@
       }
       input.value = value;
     }
+
+function maskTRDate(el) {
+  // sadece rakam kalsın, max 8 hane (GG A A YYYY)
+  let v = (el.value || "").replace(/\D/g, "").slice(0, 8);
+
+  // 2-2-4 formatla: 29051988 => 29.05.1988
+  if (v.length >= 5) {
+    el.value = v.replace(/(\d{2})(\d{2})(\d{1,4}).*/, "$1.$2.$3");
+  } else if (v.length >= 3) {
+    el.value = v.replace(/(\d{2})(\d{1,2}).*/, "$1.$2");
+  } else {
+    el.value = v;
+  }
+}
+
 function normalizeDateInput(raw) {
   if (!raw) return "";
 
