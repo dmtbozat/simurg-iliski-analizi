@@ -262,7 +262,7 @@
 
     <div class="input-group">
       <label for="person1DOB">Birinci Kişi: Doğum Tarihi</label>
-      <input type="date" id="person1DOB">
+      <input type="text" id="person1DOB" placeholder="GG.AA.YYYY" inputmode="numeric" autocomplete="bday">
     </div>
 
     <div class="input-group">
@@ -272,7 +272,7 @@
 
     <div class="input-group">
       <label for="person2DOB">İkinci Kişi: Doğum Tarihi</label>
-      <input type="date" id="person2DOB">
+      <input type="text" id="person2DOB" placeholder="GG.AA.YYYY" inputmode="numeric" autocomplete="bday">
     </div>
 
     <div class="btn-container">
@@ -313,6 +313,39 @@
       }
       input.value = value;
     }
+function normalizeDateInput(raw) {
+  if (!raw) return "";
+
+  raw = raw.trim();
+
+  // Zaten doğru format: YYYY-MM-DD
+  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return raw;
+
+  // TR format: GG.AA.YYYY veya G.A.YYYY
+  if (/^\d{1,2}\.\d{1,2}\.\d{4}$/.test(raw)) {
+    const [d, m, y] = raw.split(".");
+    const dd = d.padStart(2, "0");
+    const mm = m.padStart(2, "0");
+    return `${y}-${mm}-${dd}`;
+  }
+
+  // Slash ile: GG/AA/YYYY veya G/A/YYYY (TR kabul ediyoruz)
+  if (/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(raw)) {
+    const [d, m, y] = raw.split("/");
+    const dd = d.padStart(2, "0");
+    const mm = m.padStart(2, "0");
+    return `${y}-${mm}-${dd}`;
+  }
+
+  return ""; // tanınmadı
+}
+
+function isValidISODate(iso) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(iso)) return false;
+  const [y, m, d] = iso.split("-").map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d));
+  return dt.getUTCFullYear() === y && (dt.getUTCMonth() + 1) === m && dt.getUTCDate() === d;
+}
 
     const letterToNumber = {
       'A': 1, 'a': 1, 'J': 1, 'j': 1, 'S': 1, 's': 1, 'Ş': 1, 'ş': 1,
@@ -324,6 +357,8 @@
       'P': 7, 'p': 7, 'Y': 7, 'y': 7, 'H': 8, 'h': 8, 'Q': 8, 'q': 8,
       'Z': 8, 'z': 8, 'İ': 9, 'i': 9, 'I': 9, 'ı': 9, 'R': 9, 'r': 9
     };
+
+
 
     function calculateNameNumber(name) {
       let sum = 0;
@@ -810,8 +845,16 @@ Instagram Hesabına Erişmek için Linke Tıklayın: ` + igLink
       const person1Name = document.getElementById('person1Name').value;
       const person2Name = document.getElementById('person2Name').value;
 
-      const person1DOB = document.getElementById('person1DOB').value;
-      const person2DOB = document.getElementById('person2DOB').value;
+const person1DOBraw = document.getElementById('person1DOB').value;
+const person2DOBraw = document.getElementById('person2DOB').value;
+
+const person1DOB = normalizeDateInput(person1DOBraw);
+const person2DOB = normalizeDateInput(person2DOBraw);
+
+if (!person1DOB || !person2DOB || !isValidISODate(person1DOB) || !isValidISODate(person2DOB)) {
+  alert('Doğum tarihini "GG.AA.YYYY" formatında giriniz. Örnek: 08.05.1967');
+  return;
+}
 
       if (!person1Name || !person2Name || !person1DOB || !person2DOB) {
         alert('Lütfen her iki kişinin adı ve doğum tarihlerini giriniz.');
