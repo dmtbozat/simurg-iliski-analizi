@@ -870,10 +870,6 @@ function buildHumanInsight({ iliskiPuani, Yasam, Edinim, Dogum, Ruh, Gorunur, Is
   const strongest = parts[0];
   const weakest = parts[parts.length - 1];
 
-  // Herkeste gözüken kısa “ön test” notu
-  const generalNote =
-    "Bu test genel bir ön değerlendirmedir; ilişki dinamiği detaylı analizle çok daha netleşir.";
-
   let title = "";
   let p1 = "", p2 = "";
   let cta = ""; // sadece Değişken + Mücadele
@@ -917,7 +913,6 @@ function buildHumanInsight({ iliskiPuani, Yasam, Edinim, Dogum, Ruh, Gorunur, Is
       ${namesLine}<br>
       ${p1}<br>
       ${p2}<br>
-      <div class="h-sub">${generalNote}</div>
       ${ctaHtml}
     `
   };
