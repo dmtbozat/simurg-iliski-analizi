@@ -238,6 +238,34 @@
       background: rgba(233,216,255,0.10);
       margin-left: 6px;
     }
+
+.area-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.area-box{
+  padding: 12px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(233,216,255,0.08), rgba(255,255,255,0.04));
+  border: 1px solid rgba(241,200,76,0.18);
+  text-align: center;
+}
+
+.area-title{
+  font-size: 13px;
+  color: rgba(217,199,238,0.85);
+  margin-bottom: 6px;
+}
+
+.area-status{
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--gold-500);
+}
+
   </style>
 </head>
 
@@ -934,12 +962,37 @@ if (!person1DOB || !person2DOB || !isValidISODate(person1DOB) || !isValidISODate
   ${writeHumanCardHTML(insight)}
   <br><br>
   <b>Alan Dağılımı:</b><br>
-  Yaşam: ${getStatusText(Yasam)}<br>
-  Edinim: ${getStatusText(Edinim)}<br>
-  Doğum: ${getStatusText(Dogum)}<br>
-  Ruh: ${getStatusText(Ruh)}<br>
-  Görünür: ${getStatusText(Gorunur)}<br>
-  İsim: ${getStatusText(Isim)}
+<div class="area-grid">
+  <div class="area-box">
+    <div class="area-title">Yaşam</div>
+    <div class="area-status">${getStatusText(Yasam)}</div>
+  </div>
+
+  <div class="area-box">
+    <div class="area-title">Edinim</div>
+    <div class="area-status">${getStatusText(Edinim)}</div>
+  </div>
+
+  <div class="area-box">
+    <div class="area-title">Doğum</div>
+    <div class="area-status">${getStatusText(Dogum)}</div>
+  </div>
+
+  <div class="area-box">
+    <div class="area-title">Ruh</div>
+    <div class="area-status">${getStatusText(Ruh)}</div>
+  </div>
+
+  <div class="area-box">
+    <div class="area-title">Görünür</div>
+    <div class="area-status">${getStatusText(Gorunur)}</div>
+  </div>
+
+  <div class="area-box">
+    <div class="area-title">İsim</div>
+    <div class="area-status">${getStatusText(Isim)}</div>
+  </div>
+</div>
 
       `;
 
