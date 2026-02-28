@@ -832,6 +832,7 @@ function getStatusText(score){
       const html =
         writeParagraph(
 `Detaylı numerolojik ilişki analizi için Instagram’dan bana mesaj bırak, birlikte bakalım.
+
 Instagram Hesabına Erişmek için Linke Tıklayın: ` + igLink
         );
 
@@ -873,6 +874,10 @@ function buildHumanInsight({ iliskiPuani, Yasam, Edinim, Dogum, Ruh, Gorunur, Is
   const strongest = parts[0];
   const weakest = parts[parts.length - 1];
 
+  // Herkeste gözüken kısa “ön test” notu
+  const generalNote =
+    "Bu test genel bir ön değerlendirmedir; ilişki dinamiği detaylı analizle çok daha netleşir.";
+
   let title = "";
   let p1 = "", p2 = "";
   let cta = ""; // sadece Değişken + Mücadele
@@ -903,6 +908,8 @@ function buildHumanInsight({ iliskiPuani, Yasam, Edinim, Dogum, Ruh, Gorunur, Is
     cta =
       "<b>Detaylı analiz</b> bu dinamiği çözmek ve ilişkiyi dönüştürmek için en net adım olur.";
   }
+
+  const namesLine = `<span class="h-sub"><b>${p1Name}</b> & <b>${p2Name}</b> için kısa yorum:</span>`;
 
   // CTA sadece alt bantlarda görünsün; yoksa boş bırak.
   const ctaHtml = cta ? `<div class="h-sub">${cta}</div>` : "";
