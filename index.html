@@ -787,65 +787,79 @@ Instagram Hesabına Erişmek için Linke Tıklayın: ` + igLink
       return "Ruh Eşi";
     }
 
-    function buildHumanInsight({ iliskiPuani, Yasam, Edinim, Dogum, Ruh, Gorunur, Isim, p1Name, p2Name }) {
-      const band = getBand(iliskiPuani);
-      const label = getBandLabel(band);
+function buildHumanInsight({ iliskiPuani, Yasam, Edinim, Dogum, Ruh, Gorunur, Isim, p1Name, p2Name }) {
+  const band = getBand(iliskiPuani);
+  const label = getBandLabel(band);
 
-      const parts = [
-        { val: Yasam,    name: "Yaşam Kodları" },
-        { val: Edinim,   name: "Edinim" },
-        { val: Dogum,    name: "Doğum" },
-        { val: Ruh,      name: "Ruh" },
-        { val: Gorunur,  name: "Görünür Kişilik" },
-        { val: Isim,     name: "İsim" },
-      ].sort((a,b) => b.val - a.val);
+  const parts = [
+    { val: Yasam,    name: "Yaşam Kodları" },
+    { val: Edinim,   name: "Edinim" },
+    { val: Dogum,    name: "Doğum" },
+    { val: Ruh,      name: "Ruh" },
+    { val: Gorunur,  name: "Görünür Kişilik" },
+    { val: Isim,     name: "İsim" },
+  ].sort((a,b) => b.val - a.val);
 
-      const strongest = parts[0];
-      const weakest = parts[parts.length - 1];
+  const strongest = parts[0];
+  const weakest = parts[parts.length - 1];
 
-      let title = "";
-      let p1 = "", p2 = "", p3 = "";
-      let action = "";
-      let scale = "";
+  // Herkeste gözüken kısa “ön test” notu
+  const generalNote =
+    "Bu test genel bir ön değerlendirmedir; ilişki dinamiği detaylı analizle çok daha netleşir.";
 
-      if (band === "mucadele") {
-        title = "Zorlayıcı ama öğretici bir bağ.";
-        p1 = "Bu eşleşme kendiliğinden akmaktan çok, bilinçli emek istiyor.";
-        p2 = "Yanlış anlaşılmalar ve inatlaşma döngüsü oluşursa yıpratabilir; doğru yönetilirse olgunlaştırır.";
-        p3 = `En rahat akan tarafınız <b>${strongest.name}</b>, en çok zorlayan tarafınız ise <b>${weakest.name}</b> görünüyor.`;
-        action = "Öneri: Tartışma anında “haklılık” yerine “anlaşılma” hedefi koyun; tek bir iletişim kuralı bile ilişkiyi ciddi rahatlatır.";
-        scale = "Bu aralık genelde “zorlayıcı/öğretici” dinamiğe işaret eder.";
-      } else if (band === "degisken") {
-        title = "Emek verilirse yürür, otomatik akmaz.";
-        p1 = "Aranızda çekim var; fakat ilişki stabil kalmak için netlik ve uzlaşma ister.";
-        p2 = "Dönem dönem yakınlaşıp uzaklaşma hissi yaşayabilirsiniz; bu genelde iletişim tarzı ve beklenti farkından olur.";
-        p3 = `Şu an ilişkiyi taşıyan alan <b>${strongest.name}</b>; tıkandığınız yer ise <b>${weakest.name}</b>.`;
-        action = "Öneri: Bir konu büyümeden önce “ben böyle hissediyorum” diliyle mini konuşmalar yapın; bu eşleşmenin kilidi bu.";
-        scale = "Bu aralık “emek + uzlaşma” ile yükselen bir uyumu anlatır.";
-      } else if (band === "uyumlu") {
-        title = "Uyum yüksek; birlikte büyüme potansiyeli var.";
-        p1 = "Bu eşleşmede temel enerji genel olarak destekleyici ve tatmin edici.";
-        p2 = "Zor zamanlarda bile ortak payda bulma ihtimaliniz yüksek; ilişkiyi güçlendiren şey tutarlılık.";
-        p3 = `En güçlü tarafınız <b>${strongest.name}</b>. Dikkat edilmesi gereken tek yer <b>${weakest.name}</b> tarafında birikme olmaması.`;
-        action = "Öneri: İlişki iyi giderken bile küçük ritüeller (haftalık check-in, ortak hedef) kurarsanız uyum kalıcı olur.";
-        scale = "Bu aralık “doğal uyum” ve tatmin potansiyelini gösterir.";
-      } else {
-        title = "Çok güçlü çekim: aynı frekans hissi.";
-        p1 = "Bu eşleşme ‘az konuşup çok anlama’ hissi yaratabilir; bağ hızlı derinleşir.";
-        p2 = "Bu kadar yüksek enerji bazen yoğunluk da getirir: kıskançlık/bağımlılık yerine sağlıklı sınırlar önemli.";
-        p3 = `Sizi en çok bir arada tutan alan <b>${strongest.name}</b>. Denge için <b>${weakest.name}</b> tarafını bilinçli beslemek iyi gelir.`;
-        action = "Öneri: Bağın gücünü ilişkiyi yönetmek için kullanın; ‘her şey kader’ deyip akışa bırakmak yerine ortak plan yapın.";
-        scale = "Bu aralık “çok yüksek çekim ve güçlü bağ” enerjisidir.";
-      }
+  let title = "";
+  let p1 = "", p2 = "", p3 = "";
+  let cta = ""; // sadece Değişken + Mücadele
 
-      const namesLine = `<span class="h-sub"><b>${p1Name}</b> & <b>${p2Name}</b> için kısa yorum:</span>`;
+  if (band === "ruh_esi") {
+    title = "Doğal akış çok güçlü.";
+    p1 = "Birbirinizi kolay anladığınız, hızlı derinleşebilen bir bağ var.";
+    p2 = "Bu uyumun sırrı: iletişimi canlı tutmak ve küçük kırgınlıkları büyümeden konuşmak.";
+    p3 = `En güçlü akan alan: <b>${strongest.name}</b>. (Bu uyumu korumak için <b>${weakest.name}</b> tarafını ihmal etmeyin.)`;
+    cta = ""; // zorlamıyoruz
+  }
+  else if (band === "uyumlu") {
+    title = "Uyum yüksek; ilişki destekleyici.";
+    p1 = "Genel enerji tatmin edici ve birlikte büyümeye açık.";
+    p2 = "Zor zamanlarda bile ortak payda bulma ihtimaliniz yüksek.";
+    p3 = `En güçlü tarafınız <b>${strongest.name}</b>. Denge için <b>${weakest.name}</b> alanında birikme olmamasına dikkat edin.`;
+    cta = ""; // zorlamıyoruz
+  }
+  else if (band === "degisken") {
+    title = "Uyum potansiyeli var; emekle daha güzel akar.";
+    p1 = "Bu eşleşme kendiliğinden stabil kalmayabilir; dönem dönem iniş-çıkış hissi verebilir.";
+    p2 = "Netlik ve uzlaşma dili kurulduğunda ilişkinin ritmi ciddi rahatlar.";
+    p3 = `Şu an ilişkiyi taşıyan alan <b>${strongest.name}</b>; zorlayabilecek başlık <b>${weakest.name}</b>.`;
+    cta =
+      "<b>Detaylı analizde</b> hangi başlıkta neden zorlandığınızı netleştirip daha rahat bir yol haritası çıkarabiliriz.";
+  }
+  else { // mucadele
+    title = "Enerjiler farklı çalışıyor; bilinçli denge ister.";
+    p1 = "Bu sonuç 'kesin olmaz' demek değildir; sadece doğal akışın düşük olduğunu gösterir.";
+    p2 = "Doğru yönetilmezse yıpratabilir; doğru yönetilirse öğretici ve olgunlaştırıcı bir bağa dönüşebilir.";
+    p3 = `En rahat akan taraf <b>${strongest.name}</b>; en çok çalışılması gereken taraf <b>${weakest.name}</b> görünüyor.`;
+    cta =
+      "<b>Detaylı analiz</b> bu dinamiği çözmek ve ilişkiyi dönüştürmek için en net adım olur.";
+  }
 
-      return {
-        label,
-        title,
-        bodyHtml: `${namesLine}<br>${p1}<br>${p2}<br>${p3}<div class="h-sub">${scale}</div><div class="h-sub"><b>${action}</b></div>`
-      };
-    }
+  const namesLine = `<span class="h-sub"><b>${p1Name}</b> & <b>${p2Name}</b> için kısa yorum:</span>`;
+
+  // CTA sadece alt bantlarda görünsün; yoksa boş bırak.
+  const ctaHtml = cta ? `<div class="h-sub">${cta}</div>` : "";
+
+  return {
+    label,
+    title,
+    bodyHtml: `
+      ${namesLine}<br>
+      ${p1}<br>
+      ${p2}<br>
+      ${p3}
+      <div class="h-sub">${generalNote}</div>
+      ${ctaHtml}
+    `
+  };
+}
 
     function writeHumanCardHTML(insight){
       return `
