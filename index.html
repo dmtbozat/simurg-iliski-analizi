@@ -747,6 +747,14 @@ function isValidISODate(iso) {
       return yorum;
     }
 
+function getStatusText(score){
+  if(score >= 25) return "Güçlü Uyum";
+  if(score >= 15) return "Uyumlu";
+  if(score >= 10) return "Geliştirilebilir";
+  if(score >= 5) return "Denge Gerektirir";
+  return "Derin Öğrenme Alanı";
+}
+
     function writeTitle(title) {
       return `<b>${title}</b><br><br>`;
     }
@@ -921,12 +929,19 @@ if (!person1DOB || !person2DOB || !isValidISODate(person1DOB) || !isValidISODate
       });
 
       const outputText = `
-        <b>UYUM YÜZDESİ:</b> %${iliskiPuani}
-        <br><br>
-        <b>İLİŞKİ DURUMU:</b> ${iliskiYorumu}
-        ${writeHumanCardHTML(insight)}
-        <br>
-        <b>Yasam:</b> ${Yasam} | <b>Edinim:</b> ${Edinim} | <b>Dogum:</b> ${Dogum} | <b>Ruh:</b> ${Ruh} | <b>Gorunur:</b> ${Gorunur} | <b>Isim:</b> ${Isim}
+  <b>UYUM YÜZDESİ:</b> %${iliskiPuani}
+  <br><br>
+  <b>İLİŞKİ DURUMU:</b> ${iliskiYorumu}
+  ${writeHumanCardHTML(insight)}
+  <br><br>
+  <b>Alan Dağılımı:</b><br>
+  Yaşam: ${getStatusText(Yasam)}<br>
+  Edinim: ${getStatusText(Edinim)}<br>
+  Doğum: ${getStatusText(Dogum)}<br>
+  Ruh: ${getStatusText(Ruh)}<br>
+  Görünür: ${getStatusText(Gorunur)}<br>
+  İsim: ${getStatusText(Isim)}
+
       `;
 
       const out = document.getElementById('output');
