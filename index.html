@@ -808,28 +808,25 @@ function buildHumanInsight({ iliskiPuani, Yasam, Edinim, Dogum, Ruh, Gorunur, Is
     "Bu test genel bir ön değerlendirmedir; ilişki dinamiği detaylı analizle çok daha netleşir.";
 
   let title = "";
-  let p1 = "", p2 = "", p3 = "";
+  let p1 = "", p2 = "";
   let cta = ""; // sadece Değişken + Mücadele
 
   if (band === "ruh_esi") {
     title = "Doğal akış çok güçlü.";
     p1 = "Birbirinizi kolay anladığınız, hızlı derinleşebilen bir bağ var.";
     p2 = "Bu uyumun sırrı: iletişimi canlı tutmak ve küçük kırgınlıkları büyümeden konuşmak.";
-    p3 = `En güçlü akan alan: <b>${strongest.name}</b>. (Bu uyumu korumak için <b>${weakest.name}</b> tarafını ihmal etmeyin.)`;
     cta = ""; // zorlamıyoruz
   }
   else if (band === "uyumlu") {
     title = "Uyum yüksek; ilişki destekleyici.";
     p1 = "Genel enerji tatmin edici ve birlikte büyümeye açık.";
     p2 = "Zor zamanlarda bile ortak payda bulma ihtimaliniz yüksek.";
-    p3 = `En güçlü tarafınız <b>${strongest.name}</b>. Denge için <b>${weakest.name}</b> alanında birikme olmamasına dikkat edin.`;
     cta = ""; // zorlamıyoruz
   }
   else if (band === "degisken") {
     title = "Uyum potansiyeli var; emekle daha güzel akar.";
     p1 = "Bu eşleşme kendiliğinden stabil kalmayabilir; dönem dönem iniş-çıkış hissi verebilir.";
     p2 = "Netlik ve uzlaşma dili kurulduğunda ilişkinin ritmi ciddi rahatlar.";
-    p3 = `Şu an ilişkiyi taşıyan alan <b>${strongest.name}</b>; zorlayabilecek başlık <b>${weakest.name}</b>.`;
     cta =
       "<b>Detaylı analizde</b> hangi başlıkta neden zorlandığınızı netleştirip daha rahat bir yol haritası çıkarabiliriz.";
   }
@@ -837,7 +834,6 @@ function buildHumanInsight({ iliskiPuani, Yasam, Edinim, Dogum, Ruh, Gorunur, Is
     title = "Enerjiler farklı çalışıyor; bilinçli denge ister.";
     p1 = "Bu sonuç 'kesin olmaz' demek değildir; sadece doğal akışın düşük olduğunu gösterir.";
     p2 = "Doğru yönetilmezse yıpratabilir; doğru yönetilirse öğretici ve olgunlaştırıcı bir bağa dönüşebilir.";
-    p3 = `En rahat akan taraf <b>${strongest.name}</b>; en çok çalışılması gereken taraf <b>${weakest.name}</b> görünüyor.`;
     cta =
       "<b>Detaylı analiz</b> bu dinamiği çözmek ve ilişkiyi dönüştürmek için en net adım olur.";
   }
@@ -854,7 +850,6 @@ function buildHumanInsight({ iliskiPuani, Yasam, Edinim, Dogum, Ruh, Gorunur, Is
       ${namesLine}<br>
       ${p1}<br>
       ${p2}<br>
-      ${p3}
       <div class="h-sub">${generalNote}</div>
       ${ctaHtml}
     `
