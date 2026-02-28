@@ -816,7 +816,7 @@ function getStatusText(score){
 }
 
     function writeTitle(title) {
-      return `<b>${title}</b><br><br>`;
+      return `<b>${title}</b><br>`;
     }
 
     function writeParagraph(text) {
@@ -901,8 +901,6 @@ function buildHumanInsight({ iliskiPuani, Yasam, Edinim, Dogum, Ruh, Gorunur, Is
       "<b>Detaylı analiz</b> bu dinamiği çözmek ve ilişkiyi dönüştürmek için en net adım olur.";
   }
 
-  const namesLine = `<span class="h-sub"><b>${p1Name}</b> & <b>${p2Name}</b> için kısa yorum:</span>`;
-
   // CTA sadece alt bantlarda görünsün; yoksa boş bırak.
   const ctaHtml = cta ? `<div class="h-sub">${cta}</div>` : "";
 
@@ -910,7 +908,6 @@ function buildHumanInsight({ iliskiPuani, Yasam, Edinim, Dogum, Ruh, Gorunur, Is
     label,
     title,
     bodyHtml: `
-      ${namesLine}<br>
       ${p1}<br>
       ${p2}<br>
       ${ctaHtml}
