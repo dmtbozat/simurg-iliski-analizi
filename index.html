@@ -238,64 +238,6 @@
       background: rgba(233,216,255,0.10);
       margin-left: 6px;
     }
-
-.breakdown{
-  margin-top: 12px;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0,1fr));
-  gap: 10px;
-}
-
-@media (min-width: 520px){
-  .breakdown{ grid-template-columns: repeat(3, minmax(0,1fr)); }
-}
-
-.pill{
-  padding: 10px 10px;
-  border-radius: 12px;
-  border: 1px solid rgba(233,216,255,0.18);
-  background: rgba(255,255,255,0.04);
-}
-
-.pill .k{
-  font-size: 12px;
-  color: rgba(217,199,238,0.92);
-  font-weight: 700;
-}
-
-.pill .v{
-  margin-top: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  font-weight: 900;
-  color: var(--text);
-  font-size: 13px;
-}
-
-.tag{
-  padding: 4px 8px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 900;
-  border: 1px solid rgba(241,200,76,0.22);
-  background: rgba(241,200,76,0.10);
-  color: var(--gold-500);
-  white-space: nowrap;
-}
-
-.pill.s25{ border-color: rgba(241,200,76,0.35); background: rgba(241,200,76,0.08); }
-.pill.s15{ border-color: rgba(233,216,255,0.26); background: rgba(233,216,255,0.06); }
-.pill.s10{ border-color: rgba(233,216,255,0.20); background: rgba(255,255,255,0.04); }
-.pill.s0 { border-color: rgba(233,216,255,0.16); background: rgba(0,0,0,0.08); }
-
-.score-mini{
-  font-size: 11px;
-  color: rgba(217,199,238,0.90);
-  font-weight: 800;
-}
-
   </style>
 </head>
 
@@ -923,45 +865,6 @@ function buildHumanInsight({ iliskiPuani, Yasam, Edinim, Dogum, Ruh, Gorunur, Is
       `;
     }
 
-function scoreToText(score){
-  if (score === 25) return "Doğal Uyum";
-  if (score === 15) return "Uyumlu";
-  if (score === 10) return "Öğrenme Alanı";
-  return "Derin Öğrenme Alanı";
-}
-
-function scoreToClass(score){
-  if (score === 25) return "s25";
-  if (score === 15) return "s15";
-  if (score === 10) return "s10";
-  return "s0";
-}
-
-function buildBreakdownBadges({ Yasam, Edinim, Dogum, Ruh, Gorunur, Isim }){
-  const items = [
-    { key: "Yaşam", val: Yasam },
-    { key: "Edinim", val: Edinim },
-    { key: "Doğum", val: Dogum },
-    { key: "Ruh", val: Ruh },
-    { key: "Görünür", val: Gorunur },
-    { key: "İsim", val: Isim }
-  ];
-
-  return `
-    <div class="breakdown">
-      ${items.map(it => `
-        <div class="pill ${scoreToClass(it.val)}">
-          <div class="k">${it.key}</div>
-          <div class="v">
-            <span>${scoreToText(it.val)}</span>
-            <span class="tag">${it.val}<span class="score-mini">/25</span></span>
-          </div>
-        </div>
-      `).join("")}
-    </div>
-  `;
-}
-
     function startAnalysis() {
       const person1Name = document.getElementById('person1Name').value;
       const person2Name = document.getElementById('person2Name').value;
@@ -1023,7 +926,6 @@ if (!person1DOB || !person2DOB || !isValidISODate(person1DOB) || !isValidISODate
         <b>İLİŞKİ DURUMU:</b> ${iliskiYorumu}
         ${writeHumanCardHTML(insight)}
         <br>
-        ${buildBreakdownBadges({ Yasam, Edinim, Dogum, Ruh, Gorunur, Isim })}
       `;
 
       const out = document.getElementById('output');
