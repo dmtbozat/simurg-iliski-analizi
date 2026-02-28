@@ -934,6 +934,12 @@ if (!person1DOB || !person2DOB || !isValidISODate(person1DOB) || !isValidISODate
       out.style.display = 'block';
 
       writeKapanisMesajiHTML();
+setTimeout(() => {
+  document.getElementById("kapanis").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}, 100);
     }
 
 function maskTRDate(el) {
